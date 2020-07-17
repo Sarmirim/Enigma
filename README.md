@@ -1,9 +1,9 @@
-# TTTTEEEESSSSTTTT
-TTTTEEEESSSSTTTT is a [React-Native](https://reactnative.dev/) cross-platform [Reddit](https://www.reddit.com/) client.
+# Enigma
+Enigma is a [React-Native](https://reactnative.dev/) cross-platform [Reddit](https://www.reddit.com/) client.
 
 Hope .gitignore has no missed sensitive files.
 
-- [TTTTEEEESSSSTTTT](#tttteeeesssstttt)
+- [Enigma](#enigma)
   - [Features](#features)
   - [Download](#download)
   - [Installation](#installation)
@@ -37,7 +37,7 @@ Think about your device security before download.
 ## Installation
 
 ```bash
-git clone https://github.com/Sarmirim/TTTTEEEESSSSTTTT.git && cd ./TTTTEEEESSSSTTTT && npm install
+git clone https://github.com/Sarmirim/Enigma.git && cd ./Enigma && npm install
 ```
 ---
 ## Usage
@@ -54,7 +54,7 @@ react-native run-android
 
 Android Studio
 
-1. Open project from TTTTEEEESSSSTTTT/android
+1. Open project from Enigma/android
 
 2. Build => Make Project 
 3. Errors ? (fix them) : (Run => run 'app' with AVD emulator or your device conneted)
