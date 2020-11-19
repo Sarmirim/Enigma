@@ -5,7 +5,7 @@ const timeAgo = (value) => {
     const actualDate = new Date()
     const timeNow = Math.floor(actualDate.getTime()/1000)
     const createdDate = new Date(value*1000)
-    const diffDays = Math.floor((actualDate - createdDate) / day)
+    const diffDays = Math.floor((actualDate - createdDate)/day)
     // const dif = new Date((timeNow - value)*1000).toISOString().substr() // ({YEA}{R-MM-DD(T)hh:mm:ss})
     const dif2 = new Date((timeNow - value)*1000)//.toLocaleTimeString()
     // if difference between now and post created > 1 day than return YEARS/MONTHS/DAYS else return HOURS/MINUTES
