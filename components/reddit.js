@@ -113,12 +113,12 @@ export const Main = () => {
     const renderPost = ({item})=>{
         return <>
             <PostComponent
-                Subreddit={item.data.subreddit}
-                PostDetails=''
-                ContentText={item.data.title}
-                UpvotesText={item.data.ups}
-                CommentText={item.data.num_comments}
-                Author={item.data.author} 
+                subreddit={item.data.subreddit}
+                postDetails=''
+                contentText={item.data.title}
+                upvotesText={item.data.ups}
+                commentText={item.data.num_comments}
+                author={item.data.author} 
                 url={item.data.url}
                 created_utc={item.data.created_utc}
                 over_18={item.data.over_18}
