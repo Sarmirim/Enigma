@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Modal, StyleSheet, View, Text, useColorScheme, Pressable, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Modal, StyleSheet, View, Text, useColorScheme, Pressable, TouchableOpacity, Appearance  } from "react-native";
 import {HeaderTabs} from './HeaderTabs'
 import MaterialIconsIcon from "react-native-vector-icons/MaterialIcons";
 
@@ -7,17 +7,25 @@ import {CurrentTheme} from '../colorScheme'
 // import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
 // import IoniconsIcon from "react-native-vector-icons/Ionicons";
 
-
-       
-
 function HeaderOptions(props) {
     const [modalVisible, setModalVisible] = useState(false);
     const [sort, setSort] = useState('hot');
-    const colorScheme = useColorScheme();
+    
 
-    let click = (info)=>{
+    const click = (info)=>{
         console.log(info);
+        const colorScheme = Appearance.getColorScheme();
+        console.log(colorScheme);
     }
+
+    // THEME
+    // const [theme, setTheme] = useState(true); 
+    // useEffect(() => {
+    //     const colorScheme = Appearance.getColorScheme();
+    //     console.log(colorScheme);
+    //     setTheme(colorScheme)
+    //     // return colorScheme === "dark" ? darkStyle : lightStyle;
+    // }, [])
 
     return (
         <View style={styles.container}>
@@ -123,7 +131,7 @@ const styles = StyleSheet.create({
     sortBy: {
         color: CurrentTheme.PrimaryText,
         borderRadius: 15,
-        padding: 10,
+        // padding: 10,
     },
     centeredView: {
         justifyContent: "center",

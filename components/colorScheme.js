@@ -1,5 +1,8 @@
+import { Appearance, } from "react-native";
+import {useState} from 'react'
 // true == dark, false == light
-const theme = true; 
+let theme = true
+
 
 const darkStyle = {
     PrimaryBackground: "black",
@@ -25,5 +28,14 @@ const lightStyle = {
 }
 
 const CurrentTheme = theme ? darkStyle : lightStyle;
+
+// const CurrentTheme = () => {
+//     const [theme, setTheme] = useState(true); 
+//     const colorScheme = Appearance.getColorScheme();
+//     console.log(colorScheme);
+//     setTheme(colorScheme)
+//     return colorScheme === "dark" ? darkStyle : lightStyle;
+// }
+
 
 export {CurrentTheme};
