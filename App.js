@@ -29,8 +29,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import {Mlist} from './components/reddit'
-// import { Mlist } from './components/reddit'
+import {Main} from './components/reddit'
+// import { Main } from './components/reddit'
 
 // const App: () => React$Node = () => {
 
@@ -46,11 +46,11 @@ const App = () => {
                         <Text style={styles.footer}>Engine: Hermes</Text>
                         </View>
                 )} */}
-            <StatusBar barStyle="dark-content" />
-            <Mlist style/>
+            <StatusBar barStyle='light-content' backgroundColor="black"/>
+            <Main style/>
         </View>
 
-        // <Mlist style/>
+        // <Main style/>
 
     );
 };
