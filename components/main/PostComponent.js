@@ -39,21 +39,21 @@ const _PostComponent = (props) =>{
 
     const ImageResolver = () =>{
         return imageExist.url ? <Image     
-            // onLoad={()=>{checkValidUrl(props.url)}} 
-            // onError={()=>{console.log("error"); setImageExist(false)}} 
-            style={styles.cardItemImagePlace} 
-            blurRadius={props.over_18 ? 60 : 0} source={{uri: props.url}}>
-        </Image> : <View>
-            <Image style={styles.cardItemImagePlace} source={{uri: props.thumbnail}}/>   
-            <Text numberOfLines={1} style={{
-                paddingHorizontal: 20,
-                color: CurrentTheme.PrimaryText,
-                alignSelf: "flex-start",
-                marginBottom: 0,
-                fontSize: 15
-            }}>
-                {`>> ${props.url}`}
-            </Text>
+                // onLoad={()=>{checkValidUrl(props.url)}} 
+                // onError={()=>{console.log("error"); setImageExist(false)}} 
+                style={styles.cardItemImagePlace} 
+                blurRadius={props.over_18 ? 60 : 0} source={{uri: props.url}}>
+            </Image> : <View>
+                <Image style={styles.cardItemThumbnailPlace} source={{uri: props.thumbnail}} borderRadius={75}/>   
+                <Text numberOfLines={1} style={{
+                    paddingHorizontal: 20,
+                    color: "grey",
+                    alignSelf: "flex-start",
+                    marginBottom: 0,
+                    fontSize: 15
+                }}>
+                    {`>> ${props.url}`}
+                </Text>
             </View>
     }
 
@@ -163,6 +163,10 @@ const styles = StyleSheet.create({
     cardItemImagePlace: {
         flex: 1,
         minHeight: 210
+    },
+    cardItemThumbnailPlace: {
+        flex: 1,
+        minHeight: 210,
     },
     postWrapper: {
         alignSelf: "stretch",
