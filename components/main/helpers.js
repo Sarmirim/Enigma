@@ -57,4 +57,26 @@ const KMBformat = (n) => {
     return suffix ? round(n/pow(1000, base), 2) + suffix : '' + n
 }
 
-export  {timeAgo, KMBformat}
+
+const checkValidUrl = (url, thumbnail)=>{
+    console.log("checkValidUrl")
+    //define some image KMBformats 
+    const types = ['jpg','jpeg','tiff','png','gif','bmp']
+    console.log(thumbnail);
+    //split the url into parts that has dots before them
+    const urlPart = url.split('.')
+    const thumbnailPart = thumbnail.split('.')
+    
+    //get the last part 
+    const extension = urlPart[urlPart.length-1]
+    const extension2 = thumbnailPart[thumbnailPart.length-1]
+
+    //check if the extension matches list 
+    if(types.indexOf(extension) !== -1 || types.indexOf(extension2) !== -1) {
+        return true
+    } else{
+        return false
+    }
+    // return false;
+}
+export  {timeAgo, KMBformat, checkValidUrl}

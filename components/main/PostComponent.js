@@ -3,18 +3,18 @@ import { StyleSheet, View, Image, Text, TouchableOpacity, Share, Modal, Dimensio
 import EntypoIcon from "react-native-vector-icons/Entypo";
 import MaterialCommunityIconsIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import {CurrentTheme} from '../colorScheme'
-import {timeAgo, KMBformat} from './helpers'
+import {timeAgo, KMBformat, checkValidUrl} from './helpers'
 
 const _PostComponent = (props) =>{
     console.log("PostComponent " + props.author);
-    const [modalVisible, setModalVisible] = useState(false)
+    const [modalVisible, setModalVisible] = useState(null)
     // let imageExist = true
     const [imageExist, setImageExist] = useState(null)
 
     useEffect(() => {
         console.log("useEffect");
-        checkValidUrl(props.url)
-      }, []); //()=>{checkValidUrl(props.url)}
+        setImageExist(checkValidUrl(props.url, props.thumbnail))
+      }, []); //()=>{checkValidUrl(props.url, props.thumbnail)}
 
     const onShare = async (text) => {
         console.log("onShare")
@@ -37,28 +37,8 @@ const _PostComponent = (props) =>{
         }
     }
 
-    const checkValidUrl = (url)=>{
-        console.log("checkValidUrl")
-        //define some image KMBformats 
-        const types = ['jpg','jpeg','tiff','png','gif','bmp']
-        
-        //split the url into parts that has dots before them
-        const parts = url.split('.')
-        
-        //get the last part 
-        const extension = parts[parts.length-1]
-        
-        //check if the extension matches list 
-        if(types.indexOf(extension) !== -1) {
-            setImageExist(true)
-        } else{
-            setImageExist(false)
-        }
-        // return false;
-    }
     return (
         <View style={styles.container}>
-
             <Modal
                 animationType="fade"
                 transparent={true}
