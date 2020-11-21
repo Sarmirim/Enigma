@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Modal, StyleSheet, View, Text, useColorScheme, Pressable, TouchableOpacity, Appearance  } from "react-native";
-import {HeaderTabs} from './HeaderTabs'
+import { Modal, StyleSheet, View, Text, useColorScheme, Pressable, TouchableOpacity, Appearance } from "react-native";
 import MaterialIconsIcon from "react-native-vector-icons/MaterialIcons";
-
-import {CurrentTheme} from '../colorScheme'
-// import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
-// import IoniconsIcon from "react-native-vector-icons/Ionicons";
+import { CurrentTheme } from '../colorScheme'
 
 function HeaderOptions(props) {
     const [modalVisible, setModalVisible] = useState(false);
-    const [sort, setSort] = useState('hot');
+    // const [sort, setSort] = useState('hot');
     
-
-    const click = (info)=>{
-        console.log(info);
-        const colorScheme = Appearance.getColorScheme();
-        console.log(colorScheme);
-    }
+    // const click = (info)=>{
+    //     setSort(info)
+    //     console.log(info);
+    //     const colorScheme = Appearance.getColorScheme();
+    //     console.log(colorScheme);
+    // }
 
     // THEME
     // const [theme, setTheme] = useState(true); 
@@ -29,82 +25,55 @@ function HeaderOptions(props) {
 
     return (
         <View style={styles.container}>
-            
             <Pressable style={styles.sortContainer} onPress={() => {
                 setModalVisible(true); // console.log(colorScheme);
             }}>
-
                 <Text style={styles.sortBy}>
                     <MaterialIconsIcon color='#0000ff' name="sort"
                         style={styles.layoutIcon}/>
                             {/* Sort {'\u0024'} */}
                 </Text>
-
             </Pressable>
 
             <Modal animationType="none" transparent={true}
                 visible={modalVisible} onRequestClose={
                     () => {setModalVisible(!modalVisible);}}>
-                        
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-
-                        <TouchableOpacity onPress={()=>{click("Hot")}}
+                        <TouchableOpacity onPress={()=>{props.setSort("hot")}}
                             style={styles.navBarLeftButton}>
                             <MaterialIconsIcon style={[styles.layoutIcon, {color: CurrentTheme.SpecialText}]}
                                 name="whatshot"/>
                             <Text style={styles.modalText}>{`  Hot`}</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={()=>{click("New")}}
+                        <TouchableOpacity onPress={()=>{props.setSort("new")}}
                             style={styles.navBarLeftButton}>
                             <MaterialIconsIcon style={styles.layoutIcon} name="new-releases"/>
                             <Text style={styles.modalText}>{`  New`}</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={()=>{click("Top")}}
+                        <TouchableOpacity onPress={()=>{props.setSort("top")}}
                             style={styles.navBarLeftButton}>
                             <MaterialIconsIcon style={styles.layoutIcon} name="assessment"/>
                             <Text style={styles.modalText}>{`  Top`}</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={()=>{click("Rising")}}
+                        <TouchableOpacity onPress={()=>{props.setSort("rising")}}
                             style={styles.navBarLeftButton}>
                             <MaterialIconsIcon style={styles.layoutIcon} name="trending-up"/>
                             <Text style={styles.modalText}>{`  Rising`}</Text>
                         </TouchableOpacity>
 
-                        {/* <TouchableOpacity onPress={()=>{click("hi")}}
-                            style={styles.navBarLeftButton}>
-                            <MaterialIconsIcon style={styles.layoutIcon} name="whatshot"/>
-                            <Text style={styles.modalText}>{`  Hot`}</Text>
-                        </TouchableOpacity> */}
-
-                        {/* <Text style={styles.modalText}>{`Best~Hot`}</Text> */}
-
                         <Pressable style={styles.closeButton}
                         onPress={() => { setModalVisible(!modalVisible);}}>
-
                             <Text title="Close" style={styles.closeText}>{`Close`}</Text >
                         </Pressable>
                     </View>
                 </View>
             </Modal>
-        {/* <MaterialIconsIcon
-            name="view-agenda"
-            style={styles.layoutIcon}
-        ></MaterialIconsIcon> */}
-        {/* <Text style={styles.bestPosts}>BEST POSTS</Text> */}
-        {/* <MaterialCommunityIconsIcon
-            name="rocket"
-            style={styles.bestPostIcon}
-        ></MaterialCommunityIconsIcon>
-        <IoniconsIcon
-            name="md-arrow-dropdown"
-            style={styles.dropdownIcon}
-        ></IoniconsIcon> */}
         </View>
-    );
+    )
 }
 
 const styles = StyleSheet.create({
@@ -159,6 +128,6 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 30,
     },
-});
+})
 
-export {HeaderOptions};
+export { HeaderOptions }

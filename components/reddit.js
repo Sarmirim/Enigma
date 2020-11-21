@@ -18,8 +18,8 @@ export const Main = () => {
     
     // url variables
     const limit = 5;
-    const sort = 'hot'
-    const subreddit = 'all'
+    const [sort, setSort] = useState('hot')
+    const [subreddit, setSubreddit] = useState('all')
     const sortTime = `` // all time: t=all&     this year: t=year&     this month: t=month&     this week: t=week&     this day: t=day&     now: t=hour&
     const [link, setLink] = useState(`https://www.reddit.com/r/${subreddit}/${sort}.json?limit=${limit}&raw_json=1`)
 
@@ -48,7 +48,7 @@ export const Main = () => {
         return () => {
             setData([])
         }
-    }, []);
+    }, [sort, subreddit]);
 
     const onRefresh = () => {
         console.log("onRefresh")
@@ -96,7 +96,7 @@ export const Main = () => {
     }
 
     const renderHeader = () => {
-        return <RHeader/>
+        return <RHeader setSort={setSort} setSubreddit={setSubreddit}/>
     };
 
     const renderSeparator = () => {

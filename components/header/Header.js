@@ -4,29 +4,19 @@ import {HeaderSearch} from './HeaderSearch'
 import {HeaderOptions} from './HeaderSort'
 import {HeaderTabs} from './HeaderTabs'
 
-function RHeader(props) {
-  return (
-    <View style={styles.container}>
-        <HeaderSearch/>
-        {/* <HeaderTabs/>  */}
-    {/* <Image 
-        source={{uri: 'http://www.clicktorelease.com/code/gif/1.gif'}} 
-        style={{width: 100, height: 100 }}
-        />
-        <Image 
-        source={{uri: 'https://v.redd.it/smzeszqu3y951/DASH_96.mp4'}}
-        /> */}
-        
-    </View>
-  );
+const RHeader = (props) => {
+	return (
+		<View style={styles.container}>
+			<HeaderSearch setSort={props.setSort} setSubreddit={props.setSubreddit}/>   
+		</View>
+	)
 }
-
 
 const styles = StyleSheet.create({
     container: {
         marginVertical: 10,
         // alignSelf: 'center',
     }
-});
+})
   
-export {RHeader};
+export {RHeader}
