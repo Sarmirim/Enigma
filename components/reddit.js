@@ -7,7 +7,7 @@ import {CurrentTheme} from './colorScheme'
 // import {createStore} from 'redux'
 
 // TODO optimize useStates 
-export let Mlist = () => {
+export const Main = () => {
     // states
     const [isRefreshing, setRefreshing] = useState(null);
     const [isLoading, setLoading] = useState(null);
@@ -18,9 +18,9 @@ export let Mlist = () => {
     
     // url variables
     const limit = 7;
-    const sort = 'top'
+    const sort = 'hot'
     const subreddit = 'all'
-    const sortTime = `t=all&` // all time: t=all&     this year: t=year&     this month: t=month&     this week: t=week&     this day: t=day&     now: t=hour&
+    const sortTime = `` // all time: t=all&     this year: t=year&     this month: t=month&     this week: t=week&     this day: t=day&     now: t=hour&
     const [link, setLink] = useState(`https://www.reddit.com/r/${subreddit}/${sort}.json?limit=${limit}&raw_json=1`)
 
     // FlatList
@@ -28,7 +28,6 @@ export let Mlist = () => {
 
     // etc
     const startLink = `https://www.reddit.com/r/${subreddit}/${sort}.json?limit=${limit}&${sortTime}raw_json=1`
-    let newlink 
 
     useEffect(() => {
         console.log("firstFetch")
@@ -37,7 +36,6 @@ export let Mlist = () => {
             .then((json) => {
                 setData(json.data.children)
                 setLink(startLink + "&after=" + json.data.after)
-                newlink = startLink + "&after=" + json.data.after
                 console.log("JSON DATA: " + json.data.children)
                 console.log("new "+  json.data.after)
                 console.log("children length: " + json.data.children.length)
@@ -52,7 +50,7 @@ export let Mlist = () => {
         }
     }, []);
 
-    let onRefresh = () => {
+    const onRefresh = () => {
         console.log("onRefresh")
         setRefreshing(true)
         // setData([]);
@@ -64,7 +62,6 @@ export let Mlist = () => {
             console.log("JSON DATA: " + json.data.children)
             console.log("new "+  json.data.after)
             console.log("children length: " + json.data.children.length)
-            newlink = startLink + "&after=" + json.data.after;
         })
         .catch((error) => console.error(error))
         .finally(() => {
@@ -80,7 +77,7 @@ export let Mlist = () => {
     // }
     
     // which one (fetch || axios || ??)
-    let loadMore = () => {
+    const loadMore = () => {
         console.log("loadMore")
         // setLoading(true);
         fetch(link)
@@ -88,7 +85,6 @@ export let Mlist = () => {
         .then((json) => {
             setData(data.concat(json.data.children))
             setLink(startLink + "&after=" + json.data.after)
-            newlink = startLink + "&after=" + json.data.after
             console.log("JSON DATA: " + json.data.children)
             console.log("new "+  json.data.after)
             console.log("children length: " + json.data.children.length)
@@ -99,22 +95,22 @@ export let Mlist = () => {
         })
     }
 
-    let renderHeader = () => {
+    const renderHeader = () => {
         return <RHeader/>
     };
 
-    let renderSeparator = () => {
+    const renderSeparator = () => {
         return <View style={{height: 7, backgroundColor: "#1a1a1c",}}/>;
     };
 
-    let renderFooter = () => {
+    const renderFooter = () => {
         return isLoading ? null :
         <View style={{paddingVertical: 0, borderTopWidth: 5, borderColor: "#CED0CE"}}>
             <ActivityIndicator color="#0000ff"  animating size="large" />
         </View>
     };
 
-    let renderPost = ({item})=>{
+    const renderPost = ({item})=>{
         return <>
             <PostComponent
                 Subreddit={item.data.subreddit}
