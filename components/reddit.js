@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {StyleSheet, ScrollView, View, Text, FlatList, Image, ActivityIndicator,
-        Button, TouchableOpacity, RefreshControl, Share } from 'react-native';
+        Button, TouchableOpacity, RefreshControl, Share, ToastAndroid } from 'react-native';
 import { PostComponent } from './main/PostComponent'
 import {RHeader} from './header/Header'
 import {CurrentTheme} from './colorScheme'
@@ -22,25 +22,38 @@ export const Main = () => {
     const [subreddit, setSubreddit] = useState('all')
     const sortTime = `` // all time: t=all&     this year: t=year&     this month: t=month&     this week: t=week&     this day: t=day&     now: t=hour&
     const [link, setLink] = useState(`https://www.reddit.com/r/${subreddit}/${sort}.json?limit=${limit}&raw_json=1`)
-
+    const [searchLink, setSearchLink] = useState(null)
     // FlatList
     // const [momentum, setMomentum] = useState(true);
 
     // etc
     const startLink = `https://www.reddit.com/r/${subreddit}/${sort}.json?limit=${limit}&${sortTime}raw_json=1`
 
+    const toastError = (error) => {
+        ToastAndroid.showWithGravity(
+          `ERROR: ${error}`,
+          ToastAndroid.LONG,
+          ToastAndroid.CENTER
+        )
+      }
+
     useEffect(() => {
         console.log("firstFetch")
         fetch(startLink)
             .then((response) => response.json())
             .then((json) => {
+                console.log(json);
+                json.error ? (function(){throw json.error}()) : null
+                console.log(json)
                 setData(json.data.children)
                 setLink(startLink + "&after=" + json.data.after)
                 console.log("JSON DATA: " + json.data.children)
                 console.log("new "+  json.data.after)
                 console.log("children length: " + json.data.children.length)
             })
-            .catch((error) => console.error(error))
+            .catch((error) => {
+                toastError(error)
+            })
             .finally(() => {
                 setRefreshing(false)
                 setLoading(false)
@@ -63,7 +76,7 @@ export const Main = () => {
             console.log("new "+  json.data.after)
             console.log("children length: " + json.data.children.length)
         })
-        .catch((error) => console.error(error))
+        .catch((error) => toastError(error))
         .finally(() => {
             console.log("finally");
             setRefreshing(false);
@@ -89,7 +102,7 @@ export const Main = () => {
             console.log("new "+  json.data.after)
             console.log("children length: " + json.data.children.length)
         })
-        .catch((error) => console.error(error))
+        .catch((error) => toastError(error))
         .finally(() => {
             setLoading(false)
         })
