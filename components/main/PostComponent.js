@@ -1,16 +1,17 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity, Share, Modal, Dimensions } from "react-native";
+import { StyleSheet, View, Image, Text, TouchableOpacity, Share, Modal, Dimensions, Linking } from "react-native";
 import EntypoIcon from "react-native-vector-icons/Entypo";
 import MaterialCommunityIconsIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import {CurrentTheme} from '../colorScheme'
 import {timeAgo, KMBformat, checkValidUrl} from './helpers'
 
+
 const _PostComponent = (props) =>{
     console.log("PostComponent " + props.author);
     const [modalVisible, setModalVisible] = useState(null)
     // let imageExist = true
-    const [imageExist, setImageExist] = useState(null)
-
+    const [imageExist, setImageExist] = useState({url: null, thumbnail: null})
+    console.log(imageExist.url, imageExist.thumbnail, props.thumbnail)
     useEffect(() => {
         console.log("useEffect");
         setImageExist(checkValidUrl(props.url, props.thumbnail))
@@ -35,6 +36,32 @@ const _PostComponent = (props) =>{
         } catch (error) {
             alert(error.message);
         }
+    }
+
+
+    
+    const ImageResolver = () =>{
+        return imageExist.url ? <Image     
+            // onLoad={()=>{checkValidUrl(props.url)}} 
+            // onError={()=>{console.log("error"); setImageExist(false)}} 
+            style={styles.cardItemImagePlace} 
+            blurRadius={props.over_18 ? 60 : 0} source={{uri: props.url}}>
+        </Image> : <View>
+            <Image     
+                // onLoad={()=>{checkValidUrl(props.url)}} 
+                // onError={()=>{console.log("error"); setImageExist(false)}} 
+                style={styles.cardItemImagePlace} source={{uri: props.thumbnail}}>
+                    
+            </Image> 
+            <Text numberOfLines={1} style={
+                {paddingHorizontal: 20,
+                color: CurrentTheme.PrimaryText,
+                alignSelf: "flex-start",
+                marginBottom: 0,
+                fontSize: 15}}>
+            {`>> ${props.url}`}
+            </Text>
+            </View>
     }
 
     return (
@@ -79,15 +106,19 @@ const _PostComponent = (props) =>{
             <TouchableOpacity 
                 onPress={()=>{
                     console.log("IMAGE")
-                    setModalVisible(true)
+                    imageExist.url ? setModalVisible(true) : Linking.openURL(props.url)                  
                 }}
             >
-                <Image 
+                
+                {imageExist.thumbnail ? <ImageResolver /> : null}
+                {/* <Image     
                     // onLoad={()=>{checkValidUrl(props.url)}} 
                     // onError={()=>{console.log("error"); setImageExist(false)}} 
-                    style={imageExist ? styles.cardItemImagePlace: null} 
-                    blurRadius={props.over_18 ? 60 : 0} source={{uri: props.url}}
-                />
+                    style={imageExist.thumbnail ? styles.cardItemImagePlace: null} 
+                    blurRadius={props.over_18 ? 60 : 0} source={imageExist.url ? {uri: props.url} : {uri: props.thumbnail}}>
+                    {console.log(props.thumbnail)}
+                </Image>  */}
+
 
              </TouchableOpacity>
 
@@ -138,12 +169,16 @@ const _PostComponent = (props) =>{
                                 {/* <Text style={styles.shareText}>{`   LINK    `}</Text> */}
                             </View>
 
-                        <TouchableOpacity>
-                            {/* <MaterialCommunityIconsIcon
-                                name="dots-vertical"
-                                style={[styles.moreIcon]}
-                            /> */}
-                        </TouchableOpacity>                   
+                        {/* <TouchableOpacity>
+                            <TouchableOpacity onPress={()=>{Linking.openURL(props.url)}}>
+                                <MaterialCommunityIconsIcon
+                                    name="dots-vertical"
+                                    style={[styles.moreIcon]}
+                                />
+                            </TouchableOpacity>
+
+
+                        </TouchableOpacity>                    */}
                     </View>                   
                 </View>
             </View>
