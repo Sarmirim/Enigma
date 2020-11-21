@@ -1,4 +1,4 @@
-// timeAgo return difference between now and post created 
+// timeAgo return difference between now and post created
 const timeAgo = (value) => {
     const day = 86400000 // day = 1000 * 60 * 60 * 24
     // const timeAgoZone = new Date().getTimezoneOffset()
@@ -56,27 +56,24 @@ const KMBformat = (n) => {
     console.log("KMBformat " + n)
     return suffix ? round(n/pow(1000, base), 2) + suffix : '' + n
 }
-
-
-const checkValidUrl = (url, thumbnail)=>{
+// checkValidUrl return boolean for image url and thumbnail
+const checkValidUrl = (url, thumbnail) => {
     console.log("checkValidUrl")
-    //define some image KMBformats 
+
+    // define some image formats
     const types = ['jpg','jpeg','tiff','png','gif','bmp']
-    console.log(thumbnail);
-    //split the url into parts that has dots before them
+
+    // split the url into parts that has dots before them
     const urlPart = url.split('.')
     const thumbnailPart = thumbnail.split('.')
     
-    //get the last part 
-    const extension = urlPart[urlPart.length-1]
-    const extension2 = thumbnailPart[thumbnailPart.length-1]
+    // get the last part
+    const urlExtension = urlPart[urlPart.length-1]
+    const thumbnailExtension = thumbnailPart[thumbnailPart.length-1]
+    // check type of image
+    url = types.indexOf(urlExtension) !== -1
+    thumbnail = types.indexOf(thumbnailExtension) !== -1
 
-    //check if the extension matches list 
-    if(types.indexOf(extension) !== -1 || types.indexOf(extension2) !== -1) {
-        return true
-    } else{
-        return false
-    }
-    // return false;
+    return {url: url, thumbnail: thumbnail}
 }
 export  {timeAgo, KMBformat, checkValidUrl}
