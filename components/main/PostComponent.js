@@ -5,13 +5,12 @@ import MaterialCommunityIconsIcon from 'react-native-vector-icons/MaterialCommun
 import {CurrentTheme} from '../colorScheme'
 import {timeAgo, KMBformat, checkValidUrl} from './helpers'
 
-
 const _PostComponent = (props) =>{
     console.log("PostComponent " + props.author);
     const [modalVisible, setModalVisible] = useState(null)
-    // let imageExist = true
     const [imageExist, setImageExist] = useState({url: null, thumbnail: null})
     console.log(imageExist.url, imageExist.thumbnail, props.thumbnail)
+
     useEffect(() => {
         console.log("useEffect");
         setImageExist(checkValidUrl(props.url, props.thumbnail))
@@ -28,18 +27,16 @@ const _PostComponent = (props) =>{
             if (result.activityType) {
             // shared with activity type of result.activityType
             } else {
-            // shared
+            // shared 
             }
         } else if (result.action === Share.dismissedAction) {
-            // dismissed
+            // dismissed IOS only
         }
         } catch (error) {
             alert(error.message);
         }
     }
 
-
-    
     const ImageResolver = () =>{
         return imageExist.url ? <Image     
             // onLoad={()=>{checkValidUrl(props.url)}} 
@@ -47,19 +44,15 @@ const _PostComponent = (props) =>{
             style={styles.cardItemImagePlace} 
             blurRadius={props.over_18 ? 60 : 0} source={{uri: props.url}}>
         </Image> : <View>
-            <Image     
-                // onLoad={()=>{checkValidUrl(props.url)}} 
-                // onError={()=>{console.log("error"); setImageExist(false)}} 
-                style={styles.cardItemImagePlace} source={{uri: props.thumbnail}}>
-                    
-            </Image> 
-            <Text numberOfLines={1} style={
-                {paddingHorizontal: 20,
+            <Image style={styles.cardItemImagePlace} source={{uri: props.thumbnail}}/>   
+            <Text numberOfLines={1} style={{
+                paddingHorizontal: 20,
                 color: CurrentTheme.PrimaryText,
                 alignSelf: "flex-start",
                 marginBottom: 0,
-                fontSize: 15}}>
-            {`>> ${props.url}`}
+                fontSize: 15
+            }}>
+                {`>> ${props.url}`}
             </Text>
             </View>
     }
@@ -72,54 +65,27 @@ const _PostComponent = (props) =>{
                 visible={modalVisible}
                 onRequestClose={() => {
                     setModalVisible(!modalVisible)
-                }}
-            >
+            }}>
                 <View style={styl.centeredView}>
                     <View style={styl.modalView}>
-                        <TouchableOpacity
-                            // style={styl.openButton}
-                            onPress={() => {
+                        <TouchableOpacity onPress={() => {
                                 setModalVisible(!modalVisible)
-                            }}
-                        >
-                            <Image
-                                // style={{
-                                //     flex: 1,
-                                //     alignSelf: 'stretch',
-                                //     width: win.width,
-                                //     height: win.height,}
-                                // }
-                                source={{uri: props.url}}
+                        }}>
+                            <Image source={{
+                                uri: props.url}}
                                 resizeMode={'contain'}
                                 style={{height:'100%'}}
-                                // style={{minHeight: 600,}}
-                                //  style={styles.cardItemImagePlace}
                             />
                         </TouchableOpacity>
                     </View>
                 </View>
             </Modal>
 
-                {/* // props.url ? <Image blurRadius={0} source={{uri: props.url}}
-                // style={styles.cardItemImagePlace}>
-                // </Image> : null */}
-            <TouchableOpacity 
-                onPress={()=>{
+            <TouchableOpacity onPress={()=>{
                     console.log("IMAGE")
                     imageExist.url ? setModalVisible(true) : Linking.openURL(props.url)                  
-                }}
-            >
-                
+            }}>
                 {imageExist.thumbnail ? <ImageResolver /> : null}
-                {/* <Image     
-                    // onLoad={()=>{checkValidUrl(props.url)}} 
-                    // onError={()=>{console.log("error"); setImageExist(false)}} 
-                    style={imageExist.thumbnail ? styles.cardItemImagePlace: null} 
-                    blurRadius={props.over_18 ? 60 : 0} source={imageExist.url ? {uri: props.url} : {uri: props.thumbnail}}>
-                    {console.log(props.thumbnail)}
-                </Image>  */}
-
-
              </TouchableOpacity>
 
             <View style={props.over_18 ? styles.nsfwpostWrapper : styles.postWrapper}>
@@ -149,6 +115,7 @@ const _PostComponent = (props) =>{
                         style={styles.downvoteIcon}
                         ></EntypoIcon>
                     </View>
+
                     <TouchableOpacity style={styles.commentWrapper}>
                         <Text style={styles.commentText}>{KMBformat(props.commentText)}</Text>
                         <MaterialCommunityIconsIcon
@@ -156,29 +123,16 @@ const _PostComponent = (props) =>{
                             style={styles.commentIcon}
                         ></MaterialCommunityIconsIcon>
                     </TouchableOpacity>
+
                     <View style={styles.options}>
-                            <View style={styles.options}>
-                                <TouchableOpacity onPress={()=>{onShare(`https://www.reddit.com${props.permalink}`)}}>
-                                    <Text  style={styles.shareText}>{`POST   `}</Text>                                
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={()=>{onShare(`${props.url}`)}}>
-                                    <Text style={styles.shareText}>{`   LINK    `}</Text>
-                                </TouchableOpacity>
-                                {/* <Text onPress={()=>{`POST   `; onShare("hi")}} style={styles.shareText}>{()=>{`POST   `; onShare("hi")}}</Text> */}
-                                {/* <Text style={styles.shareText}>{`   --Share--   `}</Text> */}
-                                {/* <Text style={styles.shareText}>{`   LINK    `}</Text> */}
-                            </View>
-
-                        {/* <TouchableOpacity>
-                            <TouchableOpacity onPress={()=>{Linking.openURL(props.url)}}>
-                                <MaterialCommunityIconsIcon
-                                    name="dots-vertical"
-                                    style={[styles.moreIcon]}
-                                />
+                        <View style={styles.options}>
+                            <TouchableOpacity onPress={()=>{onShare(`https://www.reddit.com${props.permalink}`)}}>
+                                <Text  style={styles.shareText}>{`POST   `}</Text>                                
                             </TouchableOpacity>
-
-
-                        </TouchableOpacity>                    */}
+                            <TouchableOpacity onPress={()=>{onShare(`${props.url}`)}}>
+                                <Text style={styles.shareText}>{`   LINK    `}</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>                   
                 </View>
             </View>
@@ -186,18 +140,16 @@ const _PostComponent = (props) =>{
     );
 }
 
+// test version od style
 const styl = StyleSheet.create({
     container: {
         alignItems: "center",
-        // justifyContent: "center",
     },
     centeredView: {
         flex: 1,
-        // justifyContent: "center",
     },
     modalView: {
         backgroundColor: 'rgba(52, 52, 52, 0.8)',
-        // backgroundColor: "black",
         padding: 0,
     },
 });
@@ -207,11 +159,8 @@ const styles = StyleSheet.create({
         backgroundColor: CurrentTheme.PrimaryBackground,
         display: "flex",
         justifyContent: "space-around",
-        // color: CurrentTheme.PrimaryText
-        // marginBottom: 5
     },
     cardItemImagePlace: {
-        // backgroundColor: "#ccc",
         flex: 1,
         minHeight: 210
     },
@@ -236,12 +185,10 @@ const styles = StyleSheet.create({
     subreddit: {
         color: CurrentTheme.PrimaryText,
         fontSize: 14,
-        // letterSpacing: 1
     },
     postDetails: {
         color: "#808080",
         fontSize: 12,
-        // letterSpacing: 1
     },
     moreIcon: {
         color: "grey",
@@ -253,7 +200,6 @@ const styles = StyleSheet.create({
         alignSelf: "flex-start",
         marginBottom: 0,
         fontSize: 15,
-        // letterSpacing: 1
     },
     postAction: {
         paddingHorizontal: 20,
