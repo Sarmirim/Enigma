@@ -1,10 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity, Share, Modal, Dimensions } from "react-native";
-// import Ionicons from "react-native-vector-icons/Ionicons";
 import EntypoIcon from "react-native-vector-icons/Entypo";
-// import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import MaterialCommunityIconsIcon from 'react-native-vector-icons/MaterialCommunityIcons'
-import IoniconsIcon from "react-native-vector-icons/Ionicons";
 import {CurrentTheme} from '../colorScheme'
 import {timeAgo, KMBformat} from './helpers'
 
@@ -162,10 +159,10 @@ const _PostComponent = (props) =>{
                             </View>
 
                         <TouchableOpacity>
-                            <MaterialCommunityIconsIcon
+                            {/* <MaterialCommunityIconsIcon
                                 name="dots-vertical"
                                 style={[styles.moreIcon]}
-                            />
+                            /> */}
                         </TouchableOpacity>                   
                     </View>                   
                 </View>
