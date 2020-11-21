@@ -6,7 +6,7 @@ import {CurrentTheme} from '../colorScheme'
 import {timeAgo, KMBformat} from './helpers'
 
 const _PostComponent = (props) =>{
-    console.log("PostComponent " + props.Author);
+    console.log("PostComponent " + props.author);
     const [modalVisible, setModalVisible] = useState(false)
     // let imageExist = true
     const [imageExist, setImageExist] = useState(null)
@@ -115,31 +115,31 @@ const _PostComponent = (props) =>{
                 <View style={styles.postHeader}>
                     <View style={styles.headerGroup}>
                         <Text style={styles.subreddit}>
-                            {`r/${props.Subreddit}`}
+                            {`r/${props.subreddit}`}
                         </Text>
                         <Text style={styles.postDetails}>
-                            {`Posted by u/${props.Author} • ${timeAgo(props.created_utc)}`}
+                            {`Posted by u/${props.author} • ${timeAgo(props.created_utc)}`}
                         </Text>
                     </View>
                 </View >
 
                 <View style={styles.postTitle}>
                     <Text style={styles.contentText}>
-                        {props.ContentText}
+                        {props.contentText}
                     </Text>
                 </View>
 
                 <View style={styles.postAction}>
                     <View style={styles.voteWrapper}>
                         <EntypoIcon name="arrow-up" style={styles.upvoteIcon}></EntypoIcon>
-                        <Text style={styles.upvotesText}>{KMBformat(props.UpvotesText)}</Text>
+                        <Text style={styles.upvotesText}>{KMBformat(props.upvotesText)}</Text>
                         <EntypoIcon
                         name="arrow-down"
                         style={styles.downvoteIcon}
                         ></EntypoIcon>
                     </View>
                     <TouchableOpacity style={styles.commentWrapper}>
-                        <Text style={styles.commentText}>{KMBformat(props.CommentText)}</Text>
+                        <Text style={styles.commentText}>{KMBformat(props.commentText)}</Text>
                         <MaterialCommunityIconsIcon
                             name="comment"
                             style={styles.commentIcon}
