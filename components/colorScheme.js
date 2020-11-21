@@ -3,7 +3,6 @@ import {useState} from 'react'
 // true == dark, false == light
 let theme = true
 
-
 const darkStyle = {
     PrimaryBackground: "black",
     SecondaryBackground: "#1a1a1c",
@@ -36,6 +35,5 @@ const CurrentTheme = theme ? darkStyle : lightStyle;
 //     setTheme(colorScheme)
 //     return colorScheme === "dark" ? darkStyle : lightStyle;
 // }
-
 
 export {CurrentTheme};

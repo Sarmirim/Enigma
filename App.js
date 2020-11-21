@@ -1,46 +1,12 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React, { useState, useEffect } from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  FlatList,
-  Image,
-  ActivityIndicator,
-  unstable_enableLogBox,
-  Button,
-} from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-import {Main} from './components/reddit'
-// import { Main } from './components/reddit'
-
-// const App: () => React$Node = () => {
-
-
+import React, { useState, useEffect } from 'react'
+import {    SafeAreaView, StyleSheet, ScrollView, View, Text,
+            StatusBar, FlatList, Image, ActivityIndicator, Button } from 'react-native'
+import { Header, LearnMoreLinks, Colors, DebugInstructions, ReloadInstructions } from 'react-native/Libraries/NewAppScreen'
+import { Main } from './components/reddit'
 
 const App = () => {
     return (
-        <View
-            // contentI/nsetAdjustmentBehavior="automatic"
-                style={styles.scrollView}>
+        <View style={styles.scrollView}>
                 {/* {global.HermesInternal == null ? null : (
                     <View style={styles.engine}>
                         <Text style={styles.footer}>Engine: Hermes</Text>
@@ -49,11 +15,8 @@ const App = () => {
             <StatusBar barStyle='light-content' backgroundColor="black"/>
             <Main style/>
         </View>
-
-        // <Main style/>
-
-    );
-};
+    )
+}
 
 const styles = StyleSheet.create({
     scrollView: {
@@ -71,6 +34,6 @@ const styles = StyleSheet.create({
         paddingRight: 12,
         textAlign: 'right',
     },
-});
+})
 
-export default App;
+export default App
