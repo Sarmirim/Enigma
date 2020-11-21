@@ -25,6 +25,8 @@ Hope .gitignore has no missed sensitive files.
 * Clickable images (open in full(height or wide) screen)
 * NSFW blur 
 * Share buttons for direct-post and content-link 
+* Sort
+* switch subreddit
 * Classless (Can i call it "Feature"??) 
 
 ---
