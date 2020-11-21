@@ -17,7 +17,7 @@ export const Main = () => {
     // const [text, setText] = useState(``);
     
     // url variables
-    const limit = 7;
+    const limit = 5;
     const sort = 'hot'
     const subreddit = 'all'
     const sortTime = `` // all time: t=all&     this year: t=year&     this month: t=month&     this week: t=week&     this day: t=day&     now: t=hour&
@@ -105,24 +105,26 @@ export const Main = () => {
 
     const renderFooter = () => {
         return isLoading ? null :
-        <View style={{paddingVertical: 0, borderTopWidth: 5, borderColor: "#CED0CE"}}>
+        <View style={{paddingVertical: 0, borderColor: "#1a1a1c"}}>
             <ActivityIndicator color="#0000ff"  animating size="large" />
         </View>
     };
 
     const renderPost = ({item})=>{
+        const data = item.data
         return <>
             <PostComponent
-                subreddit={item.data.subreddit}
+                subreddit={data.subreddit}
                 postDetails=''
-                contentText={item.data.title}
-                upvotesText={item.data.ups}
-                commentText={item.data.num_comments}
-                author={item.data.author} 
-                url={item.data.url}
-                created_utc={item.data.created_utc}
-                over_18={item.data.over_18}
-                permalink={item.data.permalink}
+                contentText={data.title}
+                upvotesText={data.ups}
+                commentText={data.num_comments}
+                author={data.author} 
+                url={data.url}
+                created_utc={data.created_utc}
+                over_18={data.over_18}
+                permalink={data.permalink}
+                thumbnail={data.thumbnail}
             >
             </PostComponent>
         </>
