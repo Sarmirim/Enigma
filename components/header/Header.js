@@ -8,8 +8,7 @@ function RHeader(props) {
   return (
     <View style={styles.container}>
         <HeaderSearch/>
-        {/* <HeaderOptions/> */}
-        {/* <HeaderTabs/> */}
+        {/* <HeaderTabs/>  */}
     {/* <Image 
         source={{uri: 'http://www.clicktorelease.com/code/gif/1.gif'}} 
         style={{width: 100, height: 100 }}
