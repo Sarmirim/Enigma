@@ -6,10 +6,10 @@ import {HeaderTabs} from './HeaderTabs'
 
 function RHeader(props) {
   return (
-    <View style={styles.main}>
+    <View style={styles.container}>
         <HeaderSearch/>
         {/* <HeaderOptions/> */}
-        <HeaderTabs/>
+        {/* <HeaderTabs/> */}
     {/* <Image 
         source={{uri: 'http://www.clicktorelease.com/code/gif/1.gif'}} 
         style={{width: 100, height: 100 }}
@@ -24,7 +24,7 @@ function RHeader(props) {
 
 
 const styles = StyleSheet.create({
-    main: {
+    container: {
         marginVertical: 10,
         // alignSelf: 'center',
     }
